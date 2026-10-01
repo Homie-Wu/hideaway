@@ -1,0 +1,11 @@
+﻿node_modules/
+dist/
+.artifacts/
+.codex/
+.zcode/
+recordings/
+*.log
+*.mp4
+*.tsbuildinfo
+.DS_Store
+Thumbs.db

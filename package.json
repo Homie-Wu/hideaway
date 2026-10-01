@@ -1,0 +1,6 @@
+{
+  "name": "hideaway-voxel-prop-hunt", "version": "1.0.0", "private": true, "type": "module",
+  "scripts": {"dev": "vite --host 127.0.0.1", "build": "tsc --noEmit && vite build", "preview": "vite preview --host 127.0.0.1", "test": "node --experimental-strip-types --test tests/*.test.ts", "check": "tsc --noEmit"},
+  "dependencies": {"@dimforge/rapier3d-compat":"0.21.0", "three":"0.186.1"},
+  "devDependencies": {"@types/three":"^0.183.1", "@types/node":"^24.0.0", "playwright-core":"^1.58.0", "typescript":"7.0.2", "vite":"8.3.1"}
+}
