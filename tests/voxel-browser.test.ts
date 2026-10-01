@@ -11,6 +11,7 @@ test('real browser editor: geometry, 3D volume, paint, selection, smooth transfo
   const server=await createServer({configFile:false,cacheDir:path.join(tmpdir(),'hideaway-editor-vite-cache'),server:{host:'127.0.0.1',port:0},optimizeDeps:{exclude:['three']}});await server.listen();
   const address=server.httpServer!.address() as {port:number};const browser=await chromium.launch({executablePath:executable,headless:true,args:['--disable-background-timer-throttling']});
   const page=await browser.newPage({viewport:{width:1100,height:820}});const errors:string[]=[];page.on('pageerror',error=>errors.push(error.message));
+  await page.addInitScript(() => localStorage.setItem('hideaway-language','zh-CN'));
   try{
     await page.route('**/editor-harness',route=>route.fulfill({contentType:'text/html',body:`<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>Editor acceptance</title><style>html,body{margin:0;overflow:hidden}#game{width:100vw;height:100vh;display:block}#ui{position:fixed;inset:0;pointer-events:none}</style><canvas id="game"></canvas><div id="ui"></div><script type="module">
       import * as THREE from '/node_modules/three/build/three.module.js';
