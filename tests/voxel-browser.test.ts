@@ -6,7 +6,7 @@ import path from 'node:path';
 import { chromium } from 'playwright-core';
 import { createServer } from 'vite';
 
-const executable=[process.env.CHROME_PATH,'C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe','/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(candidate=>candidate&&existsSync(candidate));
+const executable=process.env.CI?undefined:[process.env.CHROME_PATH,'C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe','/usr/bin/google-chrome','/usr/bin/chromium','/usr/bin/chromium-browser','/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'].find(candidate=>candidate&&existsSync(candidate));
 test('real browser editor: geometry, 3D volume, paint, selection, smooth transform and persistent library', {skip:!executable,timeout:90000},async()=>{
   const server=await createServer({configFile:false,cacheDir:path.join(tmpdir(),'hideaway-editor-vite-cache'),server:{host:'127.0.0.1',port:0},optimizeDeps:{exclude:['three']}});await server.listen();
   const address=server.httpServer!.address() as {port:number};const browser=await chromium.launch({executablePath:executable,headless:true,args:['--disable-background-timer-throttling']});
